@@ -1,10 +1,12 @@
 FROM python:alpine
 
 # Get latest root certificates
-RUN apk add --no-cache ca-certificates && update-ca-certificates
+RUN apk add --no-cache ca-certificates git && update-ca-certificates
 
 # Install the required packages
-RUN pip install --no-cache-dir redis flower
+RUN pip install --no-cache-dir redis
+RUN git clone https://github.com/mkisono/flower.git --single-branch
+RUN cd flower && pip install .
 
 # PYTHONUNBUFFERED: Force stdin, stdout and stderr to be totally unbuffered. (equivalent to `python -u`)
 # PYTHONHASHSEED: Enable hash randomization (equivalent to `python -R`)
