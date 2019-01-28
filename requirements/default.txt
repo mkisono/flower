@@ -3,3 +3,4 @@ tornado>=4.2.0,<6.0.0
 babel>=1.0
 pytz
 futures; python_version=="2.7"
+tornado-cors
