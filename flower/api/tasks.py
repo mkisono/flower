@@ -632,5 +632,7 @@ Get a task info
         response = task.as_dict()
         if task.worker is not None:
             response['worker'] = task.worker.hostname
+        result = AsyncResult(taskid)
+        response['result'] = result.result
 
         self.write(response)
