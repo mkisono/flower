@@ -309,7 +309,7 @@ Get a task result
         result = AsyncResult(taskid)
         if not self.backend_configured(result):
             raise HTTPError(503)
-        response = {'task-id': taskid, 'state': result.state}
+        response = {'task-id': taskid, 'state': result.state, 'result': result.result}
 
         if timeout:
             result.get(timeout=timeout, propagate=False)
@@ -632,7 +632,5 @@ Get a task info
         response = task.as_dict()
         if task.worker is not None:
             response['worker'] = task.worker.hostname
-        result = AsyncResult(taskid)
-        response['result'] = result.result
 
         self.write(response)
